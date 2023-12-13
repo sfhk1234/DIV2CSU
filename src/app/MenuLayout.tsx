@@ -34,8 +34,14 @@ function renderTitle(pathname: string) {
   if (pathname in title) {
     return title[pathname as keyof typeof title];
   }
+  
+  if (pathname === '/') {
+    return '제2신속대응사단 전투근무지원대대 병영생활 관리 웹사이트';
+  }
+
   return '병영생활 관리';
 }
+
 
 export function MenuLayout({
   data,
@@ -211,17 +217,22 @@ export function MenuLayout({
                 padding: 0,
                 paddingLeft: 20,
                 alignItems: 'center',
+                justifyContent: 'space-between', // 가운데 정렬 및 공간 분배
               }}
             >
-              <Button
-                type='text'
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={onClickMenu}
-                style={{ color: '#FFF' }}
-              />
-              <p className='text-white font-bold text-xl ml-5'>
-                {renderTitle(pathname)}
-              </p>
+              <div>
+                <Button
+                  type='text'
+                  icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  onClick={onClickMenu}
+                  style={{ color: '#FFF' }}
+                />
+              </div>
+              <div>
+                <p className='text-white font-bold text-xl'>
+                  {renderTitle(pathname)}
+                </p>
+              </div>
             </Layout.Header>
             <Layout.Content>{children}</Layout.Content>
             <Layout.Footer style={{ textAlign: 'center' }}>
